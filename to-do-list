@@ -1,0 +1,93 @@
+# todo_list.py
+
+# Initialize an empty dictionary to store tasks
+todo_list = {}
+
+def add_task(task_name, task_description):
+    """
+    Add a new task to the to-do list.
+
+    Args:
+        task_name (str): The name of the task.
+        task_description (str): A brief description of the task.
+
+    Returns:
+        None
+    """
+    todo_list[task_name] = {"description": task_description, "completed": False}
+    print(f"Task '{task_name}' added to the list!")
+
+def delete_task(task_name):
+    """
+    Delete a task from the to-do list.
+
+    Args:
+        task_name (str): The name of the task to delete.
+
+    Returns:
+        None
+    """
+    if task_name in todo_list:
+        del todo_list[task_name]
+        print(f"Task '{task_name}' deleted from the list!")
+    else:
+        print(f"Task '{task_name}' not found in the list!")
+
+def display_tasks():
+    """
+    Display the current to-do list.
+
+    Returns:
+        None
+    """
+    print("To-Do List:")
+    for task_name, task_info in todo_list.items():
+        status = "Completed" if task_info["completed"] else "Pending"
+        print(f"  {task_name}: {task_info['description']} ({status})")
+
+def mark_task_complete(task_name):
+    """
+    Mark a task as complete.
+
+    Args:
+        task_name (str): The name of the task to mark as complete.
+
+    Returns:
+        None
+    """
+    if task_name in todo_list:
+        todo_list[task_name]["completed"] = True
+        print(f"Task '{task_name}' marked as complete!")
+    else:
+        print(f"Task '{task_name}' not found in the list!")
+
+def main():
+    while True:
+        print("\nTo-Do List Menu:")
+        print("  1. Add Task")
+        print("  2. Delete Task")
+        print("  3. Display Tasks")
+        print("  4. Mark Task Complete")
+        print("  5. Quit")
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            task_name = input("Enter task name: ")
+            task_description = input("Enter task description: ")
+            add_task(task_name, task_description)
+        elif choice == "2":
+            task_name = input("Enter task name to delete: ")
+            delete_task(task_name)
+        elif choice == "3":
+            display_tasks()
+        elif choice == "4":
+            task_name = input("Enter task name to mark as complete: ")
+            mark_task_complete(task_name)
+        elif choice == "5":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please try again!")
+
+if __name__ == "__main__":
+    main()
